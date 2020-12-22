@@ -1,0 +1,12 @@
+﻿@page "{id}"
+@model SemesterWork.Pages.Doctor
+@{
+    ViewData["Title"] = "Профиль врача";
+}
+@{
+    <div class="uk-section uk-background-primary uk-section-full">
+        <div class="uk-container">
+                @RouteData.Values["id"] 
+        </div>
+    </div>
+}

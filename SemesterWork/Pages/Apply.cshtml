@@ -1,0 +1,48 @@
+﻿@page
+@model SemesterWork.Pages.Apply
+@{
+    ViewData["Title"] = "Стать врачом";
+}
+@{
+    <div class="uk-section uk-background-primary uk-section-full">
+        <div class="uk-container">
+            <div class="card__profile uk-card  uk-card-default uk-card-hover">
+                <div class="uk-card-body">
+                    <h3 class="uk-card-title uk-text-bold">Создание карточки врача</h3>
+                    <div class="uk-grid-small uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand">
+                            <form class="uk-form" method="post">
+                                <div class="uk-margin">
+                                    <select class="uk-select" asp-for="Input.Specialization">
+                                        <option disabled>Выберите специальность</option>
+                                        @foreach (var spec in Model.Specializations)
+                                        {
+                                            <option value="@spec">@spec</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="uk-margin">
+                                    <textarea
+                                        asp-for="Input.Description"
+                                        class="uk-textarea"
+                                        name="firstName"
+                                        type="text"
+                                        placeholder="Описание опыта работы">
+                                    </textarea>
+                                </div>
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="date" asp-for="Input.StartTime">
+                                </div>
+                                <div class="uk-margin">
+                                    <button class="uk-button uk-width-1" type="submit">
+                                        Стать врачом
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

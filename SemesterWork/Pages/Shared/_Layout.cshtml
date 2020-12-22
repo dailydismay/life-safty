@@ -1,0 +1,82 @@
+﻿@using SemesterWork.Services
+@using SemesterWork.DAL.Entities
+<!DOCTYPE html>
+<html lang="en">
+@inject AuthService AuthService
+@{
+  var isAuthorized = ViewData["userId"] != null && !(ViewData["userId"].Equals(""));
+
+  UserEntity user = null;
+
+  if (isAuthorized)
+  {
+    user = await AuthService.GetUserById(long.Parse(ViewData["userId"].ToString()));
+  }
+  
+}
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SemesterWork</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.16/dist/css/uikit.min.css" />
+    
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.16/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.16/dist/js/uikit-icons.min.js"></script>
+</head>
+<body>
+<div class="uk-navbar-container tm-navbar-container uk-sticky uk-active uk-sticky-below uk-sticky-fixed">
+  <div class="uk-container uk-container-expand">
+   <nav class="uk-navbar uk-navbar-container uk-navbar-transparent">
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li><a href="" class="uk-navbar-item uk-hidden-small">Услуги</a></li>
+        <li>
+          <a href="" class="uk-navbar-item uk-hidden-small">Врачи</a>
+        </li>
+        <li>
+          <a asp-page="Apply" class="uk-navbar-item uk-hidden-small">Стать врачом</a>
+        </li>
+      </ul>
+    </div>
+     <div class="uk-navbar-center">
+      <a href="" class="uk-navbar-item uk-logo uk-text-secondary uk-button">LifeSafety</a>
+     </div>
+    
+    <div class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
+        <li>
+          <div class="uk-navbar-item">
+            @if (isAuthorized && user != null)
+            {
+              <div class="uk-inline">
+                <a asp-page="Profile" class="uk-button uk-button-text" type="button">Профиль - @user.Username</a>
+              </div>
+            }
+            else
+            {
+              <div class="uk-inline">
+                <a asp-page="Login" class="uk-button" type="button">Войти</a>
+                <a asp-page="Register" class="uk-button" type="button">Зарегистрироваться</a>
+              </div>
+            }
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>    
+  </div>
+</div>
+
+@RenderBody()
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>

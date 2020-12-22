@@ -1,0 +1,53 @@
+﻿@page
+@model SemesterWork.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Регистрация";
+}
+@{
+    <div class="uk-section uk-background-primary uk-section-full">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-start">
+                <div class="uk-width-1-2">
+                    <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                        <div class="uk-card-body">
+                            <form class="form_login" method="post">
+                                <div class="uk-margin">
+                                    <input
+                                        asp-for="Input.Email"
+                                        type="text"
+                                        name="email"
+                                        class="uk-input"
+                                        placeholder="Эл. Почта"
+                                    />
+                                </div>
+                                 <div class="uk-margin">
+                                <input
+                                    asp-for="Input.Username"
+                                    type="text"
+                                    name="username"
+                                    class="uk-input"
+                                    placeholder="Имя пользователя"
+                                />
+                                </div>
+                                <div class="uk-margin">
+                                    <input
+                                        asp-for="Input.Password"
+                                        name="password"
+                                        type="password"
+                                        class="uk-input"
+                                        placeholder="Пароль"
+                                    />
+                                </div>
+                                <div class="uk-margin">
+                                    <button class="uk-button uk-width-1" type="submit">
+                                        Зарегистрироваться
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

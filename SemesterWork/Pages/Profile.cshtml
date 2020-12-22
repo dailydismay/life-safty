@@ -1,0 +1,103 @@
+﻿@page
+@model SemesterWork.Pages.Profile
+@{
+  ViewData["Title"] = "Профиль";
+  var fullName = $"{Model.ProfileResponse.LastName} {Model.ProfileResponse.FirstName} {Model.ProfileResponse.Patronymic}";
+
+  Func<string, string> renderName = username => fullName.Length > 2 ? fullName : username;
+}
+@{
+  <div class="uk-section uk-background-primary">
+    <div class="uk-container">
+      <div class="uk-flex uk-flex-between">
+        <div class="uk-width-1-2">
+          <div class="card__profile uk-card  uk-card-default uk-card-hover">
+            <div class="uk-card-body">
+              <h3 class="uk-card-title uk-text-bold">Редактировать ФИО</h3>
+              <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                  <form class="uk-form" method="post">
+                      <div class="uk-margin">
+                            <input
+                              type="text"
+                              name="lastName"
+                              class="uk-input"
+                              placeholder="Фамилия"
+                              value="@Model.ProfileResponse.LastName"
+                              asp-for="Input.LastName"
+                            />
+                        </div>
+                        <div class="uk-margin">
+                          <input
+                            name="firstName"
+                            type="text"
+                            class="uk-input"
+                            asp-for="Input.FirstName"
+                            placeholder="Имя"
+                            value="@Model.ProfileResponse.FirstName"
+                          />
+                        </div>
+                    <div class="uk-margin">
+                      <input
+                        name="patronymic"
+                        type="text"
+                        class="uk-input"
+                        asp-for="Input.Patronymic"
+                        placeholder="Отчество"
+                        value="@Model.ProfileResponse.Patronymic"
+                      />
+                    </div>
+                       <div class="uk-margin">
+                          <input
+                            name="patronymic"
+                            type="date"
+                            class="uk-input"
+                            asp-for="Input.BirthDate"
+                            placeholder="Дата рождения"
+                            value="@Model.ProfileResponse.BirthDate"
+                          />
+                          </div>
+                          <div class="uk-margin">
+                            <button class="uk-button uk-width-1" type="submit">
+                              Применить Изменения
+                            </button>
+                          </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="uk-width-1-2">
+          <div class="card__profile uk-card uk-card-default uk-card-hover">
+            <div class="uk-card-body">
+              <h3 class="uk-card-title uk-text-bold">
+                <div class="uk-flex uk-flex-between">
+                  <h2>@renderName(Model.ProfileResponse.Username)</h2>
+                </div>
+              </h3>
+              <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div class="uk-width-expand">
+                  
+                  
+                  <p class="uk-text-meta uk-margin-remove-top">
+                    <label>Имя пользователя:</label>
+                    <span>@Model.ProfileResponse.Username</span>
+                  </p>
+                  <p class="uk-text-meta uk-margin-remove-top">
+                    <label>Эл. Адрес:</label>
+                    <span>@Model.ProfileResponse.Email</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="uk-card-footer uk-flex uk-flex-between">
+              <a href="#" class="uk-button uk-button-text">Статус врача</a>
+              <a asp-page="Logout" class="uk-button uk-button-text">Выйти</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

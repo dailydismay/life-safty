@@ -1,0 +1,51 @@
+﻿@page
+@using SemesterWork.DAL.Dto
+@model SemesterWork.Pages.Doctors
+@{
+    ViewData["Title"] = "Профиль врача";
+    var perPage = "5";
+    if (Request.Query.ContainsKey("perPage"))
+    {
+        perPage = Request.Query["perPage"];
+    }
+}
+@{
+    <div class="uk-section uk-background-primary uk-section-full">
+        <div class="uk-container">
+            <div class="uk-flex uk-flex-between">
+                @foreach (var doctor in Model.DoctorsResponse.Items)
+                {
+                    <div class="">
+                        <div class="uk-card uk-card-default uk-card-body">
+                            <div class="uk-card-header">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">
+                                        <h3 class="uk-card-title uk-margin-remove-bottom">@doctor.Profile.FirstName @doctor.Profile.Patronymic</h3>  
+                                        <div class="uk-card-badge uk-label">@doctor.Doctor.Specialization</div>
+                                        <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00">Опыт работы: от @doctor.Doctor.StartTime.ToShortDateString()</time></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-card-body">
+                                <p>@doctor.Doctor.Description</p>
+                            </div>
+                            <div class="uk-card-footer">
+                                <a href="#" class="uk-button uk-button-text">Перейти к отзывам</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="uk-container uk-margin">
+            <div class="uk-card uk-card-default uk-card-body">
+                <ul class="uk-pagination" uk-margin>
+                    @for (var i = 0; i < Model.DoctorsResponse.Total / int.Parse(perPage); i += 1)
+                    {
+                        <li><a href="/Doctors?page=@i&perPage=@perPage"><span>@i</span></a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+}
